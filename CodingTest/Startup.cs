@@ -52,11 +52,12 @@ namespace CodingTest
             });
 
             // Database Connection
+            var TodoConnection = Environment.GetEnvironmentVariable("DB_CONNECTION");
             services.AddDbContext<ToDoDbContext>(
                 options => options
                     //.UseLoggerFactory(services.lo)
                     .EnableSensitiveDataLogging(true)
-                    .UseNpgsql(Configuration.GetConnectionString("TodoConnection")));
+                    .UseNpgsql(TodoConnection));
 
             // configure DI for application services and repository
             services.AddScoped<ITodoRepository, TodoRepository>();
